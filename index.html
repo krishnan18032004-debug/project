@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>NEXORA | Explore What's Next.</title>
+    <meta name="description" content="Premium product discovery and comparison platform.">
+    
+    <!-- Premium Typography: Inter for UI, JetBrains Mono for specs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="dark-theme">
+
+    <!-- Floating Navigation -->
+    <header id="global-header" class="glass-panel">
+        <div class="nav-container">
+            <a href="#home" class="brand-logo" aria-label="NEXORA Home">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#accent-gradient)" stroke-width="2">
+                    <defs>
+                        <linearGradient id="accent-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#6EA8FE" />
+                            <stop offset="50%" stop-color="#8B5CF6" />
+                            <stop offset="100%" stop-color="#EC4899" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span class="nexora-wordmark">NEXORA</span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#explore" class="nav-link">Explore</a>
+                <a href="#launches" class="nav-link gradient-text">New Launches</a>
+                <a href="#brands" class="nav-link">Brands</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" data-action="open-search" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <button class="icon-btn" data-action="navigate" data-target="compare" aria-label="Compare">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 21l6-6M9 8l-6 6M4 14v5h5"/></svg>
+                    <span id="nav-compare-count" class="badge hidden">0</span>
+                </button>
+                <button class="icon-btn" data-action="navigate" data-target="saved" aria-label="Saved Items">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="icon-btn mobile-menu-btn" data-action="toggle-mobile-menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <a href="#home" class="nav-link" data-action="close-menu">Home</a>
+            <a href="#explore" class="nav-link" data-action="close-menu">Explore</a>
+            <a href="#launches" class="nav-link gradient-text" data-action="close-menu">New Launches</a>
+            <a href="#brands" class="nav-link" data-action="close-menu">Brands</a>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="search-overlay hidden">
+        <div class="search-modal glass-panel">
+            <div class="search-header">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="text" id="search-input" placeholder="Search smartphones, cars, bikes..." autocomplete="off">
+                <button class="icon-btn" data-action="close-search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div id="search-results" class="search-results">
+                <p class="search-hint">Start typing to explore what's next.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Mount Point -->
+    <main id="app-root"></main>
+
+    <!-- Compare Floating Tray -->
+    <aside id="compare-tray" class="compare-tray hidden glass-panel">
+        <div class="tray-content">
+            <div class="tray-info">
+                <span class="mono-text"><span id="compare-count">0</span>/3 Selected</span>
+                <span class="tray-category" id="compare-category">Category</span>
+            </div>
+            <div class="tray-actions">
+                <button class="btn-secondary" data-action="clear-compare">Clear</button>
+                <a href="#compare" class="btn-primary">Compare</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+        <div class="footer-content container">
+            <div class="footer-brand">
+                <h2 class="nexora-wordmark">NEXORA</h2>
+                <p class="text-muted">Explore What's Next.</p>
+            </div>
+            <div class="footer-links">
+                <p class="mono-text text-muted">&copy; 2026 NEXORA Premium Discovery Platform.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container"></div>
+</body>
+</html>
